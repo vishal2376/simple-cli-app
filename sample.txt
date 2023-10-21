@@ -1,4 +1,4 @@
 grep is short for "global regular expression print".
 If you are a system admin who needs to scrape through log files or
 a developer trying to find certain occurrences in the code file,
-then grep is a powerful command to use.
+then GREP is a powerful command to use.
