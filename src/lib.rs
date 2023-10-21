@@ -37,6 +37,19 @@ pub fn search<'a>(query: &'a str, content: &'a str) -> Vec<&'a str> {
     result
 }
 
+pub fn search_insensitive<'a>(query: &'a str, content: &'a str) -> Vec<&'a str> {
+    let mut result = Vec::new();
+    let query = query.to_lowercase();
+
+    for line in content.lines() {
+        if line.to_lowercase().contains(&query) {
+            result.push(line);
+        }
+    }
+
+    result
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -49,5 +62,18 @@ Rust is a powerful language.
 It is most loved language.
 It has most uniqe features.";
         assert_eq!(vec!["It has most uniqe features."], search(query, content));
+    }
+
+    #[test]
+    fn case_insensitive() {
+        let query = "lAnG";
+        let content = "\
+Rust is a powerful language.
+It is most loved language.
+It has most uniqe features.";
+        assert_eq!(
+            vec!["Rust is a powerful language.", "It is most loved language."],
+            search_insensitive(query, content)
+        );
     }
 }
