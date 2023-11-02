@@ -46,14 +46,10 @@ impl Config {
 }
 
 pub fn search<'a>(query: &'a str, content: &'a str) -> Vec<&'a str> {
-    let mut result = Vec::new();
-
-    for line in content.lines() {
-        if line.contains(query) {
-            result.push(line);
-        }
-    }
-    result
+    content
+        .lines()
+        .filter(|line| line.contains(query))
+        .collect()
 }
 
 pub fn search_insensitive<'a>(query: &'a str, content: &'a str) -> Vec<&'a str> {
